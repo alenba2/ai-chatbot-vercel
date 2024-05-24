@@ -5,6 +5,7 @@ import { auth } from '@/auth'
 import { getChat, getMissingKeys } from '@/app/actions'
 import { Chat } from '@/components/chat'
 import { AI } from '@/lib/chat/actions'
+import { Assistant } from '@/lib/chat/assistant'
 import { Session } from '@/lib/types'
 
 export interface ChatPageProps {
@@ -48,13 +49,17 @@ export default async function ChatPage({ params }: ChatPageProps) {
   }
 
   return (
-    <AI initialAIState={{ chatId: chat.id, messages: chat.messages }}>
-      <Chat
-        id={chat.id}
-        session={session}
-        initialMessages={chat.messages}
-        missingKeys={missingKeys}
-      />
-    </AI>
+
+    // <Assistant>
+
+    // </Assistant>
+    // <AI initialAIState={{ chatId: chat.id, messages: chat.messages }}>
+    //   <Chat
+    //     id={chat.id}
+    //     session={session}
+    //     initialMessages={chat.messages}
+    //     missingKeys={missingKeys}
+    //   />
+    // </AI>
   )
 }

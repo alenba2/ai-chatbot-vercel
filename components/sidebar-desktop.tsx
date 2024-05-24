@@ -15,5 +15,6 @@ export async function SidebarDesktop() {
       {/* @ts-ignore */}
       <ChatHistory userId={session.user.id} />
     </Sidebar>
+    
   )
 }
