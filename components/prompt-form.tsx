@@ -20,16 +20,18 @@ import { useRouter } from 'next/navigation'
 
 export function PromptForm({
   input,
-  setInput
+  setInput,
+  submitMessage
 }: {
   input: string
-  setInput: (value: string) => void
+  setInput: (value: any) => void
+  submitMessage: (event?: React.FormEvent<HTMLFormElement>) => void
 }) {
   const router = useRouter()
   const { formRef, onKeyDown } = useEnterSubmit()
   const inputRef = React.useRef<HTMLTextAreaElement>(null)
-  const { submitUserMessage } = useActions()
-  const [_, setMessages] = useUIState<typeof AI>()
+  // const { submitUserMessage } = useActions()
+  // const [_, setMessages] = useUIState<typeof AI>()
 
   React.useEffect(() => {
     if (inputRef.current) {
@@ -37,35 +39,40 @@ export function PromptForm({
     }
   }, [])
 
+  function handleSubmit(e){
+   console.log(input)
+
+  }
+
   return (
-    <form
-      ref={formRef}
-      onSubmit={async (e: any) => {
-        e.preventDefault()
+    // <form
+    //   ref={formRef}
+    //   onSubmit={async (e: any) => {
+    //     e.preventDefault()
 
-        // Blur focus on mobile
-        if (window.innerWidth < 600) {
-          e.target['message']?.blur()
-        }
+    //     // Blur focus on mobile
+    //     if (window.innerWidth < 600) {
+    //       e.target['message']?.blur()
+    //     }
 
-        const value = input.trim()
-        setInput('')
-        if (!value) return
+    //     const value = input.trim()
+    //     setInput('')
+    //     if (!value) return
 
-        // Optimistically add user message UI
-        setMessages(currentMessages => [
-          ...currentMessages,
-          {
-            id: nanoid(),
-            display: <UserMessage>{value}</UserMessage>
-          }
-        ])
+    //     // Optimistically add user message UI
+    //     setMessages(currentMessages => [
+    //       ...currentMessages,
+    //       {
+    //         id: nanoid(),
+    //         display: <UserMessage>{value}</UserMessage>
+    //       }
+    //     ])
 
-        // Submit and get response message
-        const responseMessage = await submitUserMessage(value)
-        setMessages(currentMessages => [...currentMessages, responseMessage])
-      }}
-    >
+    //     // Submit and get response message
+    //     const responseMessage = await submitUserMessage(value)
+    //     setMessages(currentMessages => [...currentMessages, responseMessage])
+    //   }}
+    // >
       <div className="relative flex max-h-60 w-full grow flex-col overflow-hidden bg-background px-8 sm:rounded-md sm:border sm:px-12">
         <Tooltip>
           <TooltipTrigger asChild>
@@ -96,20 +103,33 @@ export function PromptForm({
           name="message"
           rows={1}
           value={input}
-          onChange={e => setInput(e.target.value)}
+          onChange={setInput}
         />
         <div className="absolute right-0 top-[13px] sm:right-4">
           <Tooltip>
             <TooltipTrigger asChild>
-              <Button type="submit" size="icon" disabled={input === ''}>
-                <IconArrowElbow />
-                <span className="sr-only">Send message</span>
-              </Button>
+              {/* Submit Message on Click */}
+            <form onSubmit={submitMessage}>  
+            <Button type="submit" size="icon" disabled={input === ''} >
+              <IconArrowElbow />
+              <span className="sr-only">Send message</span>
+            </Button>
+            </form> 
+            
             </TooltipTrigger>
             <TooltipContent>Send message</TooltipContent>
           </Tooltip>
+
+        {/* <form onSubmit={handleSubmit}> 
+        <input
+          disabled={status !== 'awaiting_message'}
+          value={input}
+          placeholder="What is the temperature in the living room?"
+          onChange={handleInputChange}
+        />
+        </form> */}
         </div>
-      </div>
-    </form>
+    </div> 
+    // </form> 
   )
 }

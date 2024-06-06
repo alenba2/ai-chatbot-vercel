@@ -8,18 +8,57 @@ import { IconShare } from '@/components/ui/icons'
 import { FooterText } from '@/components/footer'
 import { ChatShareDialog } from '@/components/chat-share-dialog'
 import { useAIState, useActions, useUIState } from 'ai/rsc'
-import type { AI } from '@/lib/chat/actions'
+// import type { AI } from '@/lib/chat/actions'
 import { nanoid } from 'nanoid'
 import { UserMessage } from './stocks/message'
+
+import { Message, useAssistant } from 'ai/react';
 
 export interface ChatPanelProps {
   id?: string
   title?: string
   input: string
-  setInput: (value: string) => void
+  setInput: (value: any) => void
   isAtBottom: boolean
   scrollToBottom: () => void
+  messages: Message[]
+  submitMessage: (event?: React.FormEvent<HTMLFormElement>) => void
 }
+
+// export function ChatPanel(){
+//   const { status, messages, input, submitMessage, handleInputChange } =
+//   useAssistant({ api: '/api/assistant' });
+//   return (
+//     <div>
+//       {messages.map((m: Message) => (
+//         <div key={m.id}>
+//           <strong>{`${m.role}: `}</strong>
+//           {m.role !== 'data' && m.content}
+//           {m.role === 'data' && (
+//             <>
+//               {(m.data as any).description}
+//               <br />
+//               <pre className={'bg-gray-200'}>
+//                 {JSON.stringify(m.data, null, 2)}
+//               </pre>
+//             </>
+//           )}
+//         </div>
+//       ))}
+
+//       {status === 'in_progress' && <div />}
+
+//       <form onSubmit={submitMessage}>
+//         <input
+//           disabled={status !== 'awaiting_message'}
+//           value={input}
+//           placeholder="What is the temperature in the living room?"
+//           onChange={handleInputChange}
+//         />
+//       </form>
+//     </div>
+//   );
+// }
 
 export function ChatPanel({
   id,
@@ -27,35 +66,39 @@ export function ChatPanel({
   input,
   setInput,
   isAtBottom,
-  scrollToBottom
+  scrollToBottom,
+  messages,
+  submitMessage
 }: ChatPanelProps) {
-  const [aiState] = useAIState()
-  const [messages, setMessages] = useUIState<typeof AI>()
-  const { submitUserMessage } = useActions()
+  // const [aiState] = useAIState()
+  // const [messages, setMessages] = useUIState<typeof AI>()
+  // const { submitUserMessage } = useActions()
+  // const { status, messages, inputs, submitMessage, handleInputChange } =
+  // useAssistant({ api: '/api/assistant' });
   const [shareDialogOpen, setShareDialogOpen] = React.useState(false)
 
-  const exampleMessages = [
-    {
-      heading: 'What are the',
-      subheading: 'trending memecoins today?',
-      message: `What are the trending memecoins today?`
-    },
-    {
-      heading: 'What is the price of',
-      subheading: '$DOGE right now?',
-      message: 'What is the price of $DOGE right now?'
-    },
-    {
-      heading: 'I would like to buy',
-      subheading: '42 $DOGE',
-      message: `I would like to buy 42 $DOGE`
-    },
-    {
-      heading: 'What are some',
-      subheading: `recent events about $DOGE?`,
-      message: `What are some recent events about $DOGE?`
-    }
-  ]
+  // const exampleMessages = [
+  //   {
+  //     heading: 'What are the',
+  //     subheading: 'trending memecoins today?',
+  //     message: `What are the trending memecoins today?`
+  //   },
+  //   {
+  //     heading: 'What is the price of',
+  //     subheading: '$DOGE right now?',
+  //     message: 'What is the price of $DOGE right now?'
+  //   },
+  //   {
+  //     heading: 'I would like to buy',
+  //     subheading: '42 $DOGE',
+  //     message: `I would like to buy 42 $DOGE`
+  //   },
+  //   {
+  //     heading: 'What are some',
+  //     subheading: `recent events about $DOGE?`,
+  //     message: `What are some recent events about $DOGE?`
+  //   }
+  // ]
 
   return (
     <div className="fixed inset-x-0 bottom-0 w-full bg-gradient-to-b from-muted/30 from-0% to-muted/30 to-50% duration-300 ease-in-out animate-in dark:from-background/10 dark:from-10% dark:to-background/80 peer-[[data-state=open]]:group-[]:lg:pl-[250px] peer-[[data-state=open]]:group-[]:xl:pl-[300px]">
@@ -66,7 +109,7 @@ export function ChatPanel({
 
       <div className="mx-auto sm:max-w-2xl sm:px-4">
         <div className="mb-4 grid grid-cols-2 gap-2 px-4 sm:px-0">
-          {messages.length === 0 &&
+          {/* {messages.length === 0 &&
             exampleMessages.map((example, index) => (
               <div
                 key={example.heading}
@@ -97,7 +140,7 @@ export function ChatPanel({
                   {example.subheading}
                 </div>
               </div>
-            ))}
+            ))} */}
         </div>
 
         {messages?.length >= 2 ? (
@@ -130,7 +173,7 @@ export function ChatPanel({
         ) : null}
 
         <div className="space-y-4 border-t bg-background px-4 py-2 shadow-lg sm:rounded-t-xl sm:border md:py-4">
-          <PromptForm input={input} setInput={setInput} />
+          <PromptForm input={input} setInput={setInput} submitMessage={submitMessage} />
           <FooterText className="hidden sm:block" />
         </div>
       </div>
