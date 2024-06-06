@@ -5,7 +5,7 @@ import { auth } from '@/auth'
 import { getChat, getMissingKeys } from '@/app/actions'
 import { Chat } from '@/components/chat'
 import { AI } from '@/lib/chat/actions'
-import { Assistant } from '@/lib/chat/assistant'
+// import { Assistant } from '@/lib/chat/assistant'
 import { Session } from '@/lib/types'
 
 export interface ChatPageProps {
