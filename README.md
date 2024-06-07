@@ -66,6 +66,8 @@ pnpm dev
 
 Your app template should now be running on [localhost:3000](http://localhost:3000/).
 
+Requires your own .env file with your own: OPENAI_API_KEY and ASSISTANT_ID. Instructions are in the .env.example file
+
 ## Authors
 
 This library is created by [Vercel](https://vercel.com) and [Next.js](https://nextjs.org) team members, with contributions from:
