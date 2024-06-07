@@ -1,7 +1,7 @@
 <a href="https://chat.vercel.ai/">
   <img alt="Next.js 14 and App Router-ready AI chatbot." src="https://chat.vercel.ai/opengraph-image.png">
   <h1 align="center">Next.js AI Chatbot</h1>
-  <img width="724" alt="Screenshot 2024-06-06 at 12 27 54 PM" align="center" src="https://github.com/alenba2/ai-chatbot-vercel/assets/36782804/2082d627-5b47-4581-9b43-20062f0fe6dd">
+  <img width="724" alt="Screenshot 2024-06-06 at 12 27 54 PM" class="center" src="https://github.com/alenba2/ai-chatbot-vercel/assets/36782804/2082d627-5b47-4581-9b43-20062f0fe6dd">
 </a>
 
 <p align="center">
