@@ -70,6 +70,10 @@ Requires your own .env file with your own: `OPENAI_API_KEY` and `ASSISTANT_ID`. 
 
 ## Authors
 
+User Forked from https://github.com/vercel/ai-chatbot
+
+- alenba2
+
 This library is created by [Vercel](https://vercel.com) and [Next.js](https://nextjs.org) team members, with contributions from:
 
 - Jared Palmer ([@jaredpalmer](https://twitter.com/jaredpalmer)) - [Vercel](https://vercel.com)
