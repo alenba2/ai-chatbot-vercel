@@ -70,9 +70,7 @@ Requires your own .env file with your own: `OPENAI_API_KEY` and `ASSISTANT_ID`. 
 
 ## Authors
 
-User Forked from https://github.com/vercel/ai-chatbot
-
-- alenba2
+I Forked from https://github.com/vercel/ai-chatbot, However, I made some changes so that it uses AI assistance than the AI RSC
 
 This library is created by [Vercel](https://vercel.com) and [Next.js](https://nextjs.org) team members, with contributions from:
 
